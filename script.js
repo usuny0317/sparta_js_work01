@@ -27,28 +27,49 @@ let url="https://api.themoviedb.org/3/movie/popular?api_key=2b065c456f47ab719385
         alert(`${err}: 데이터를 가져오지 못했습니다..`)
     })
 
-    
+
 //엔터(키번호13)누르면 동작하기 
 press_enter=() =>{
     if(window.event.keyCode ==13){
-        console.log("눌렸어요")
         searchTitle();
     }
 };
 
 //검색
 function searchTitle(){
-    console.log("됐어요");
     momcards.replaceChildren();
-    let test=document.getElementById("search").value;
-    console.log(test+"");
-    let newcard= document.createElement('div');
-    newcard.innerHTML=`<div id="card">
-            <img src="달봉2.jpg" class="images">
-            <div class="textss">
-                <p>귀엽다</p>
-                <small>8.9</small>
-            </div>
-        </div>`
-    momcards.appendChild(newcard);
+    let input_value=document.getElementById("search").value;
+    fetch(url)
+    .then((res) => {return res.json()})
+    .then((data)=>{
+        let movie_val =data.results;
+        for(let  i =0 ; i<movie_val.length; i++){
+            if(movie_val[i].title.includes(input_value)){
+                let newcard= document.createElement('div');
+                newcard.innerHTML=`<div id="card">
+                    <img src="${image_front}original${movie_val[i].backdrop_path}" class="images">
+                    <div class="textss">
+                    <p>${movie_val[i].title}</p>
+                    <small>${movie_val[i].vote_average}</small>
+                    </div>
+                </div>` 
+            momcards.appendChild(newcard);}}})
+    .catch((err)=>{
+        alert(`${err}: 데이터를 가져오지 못했습니다..`)
+    }) 
+}
+
+//모달 열어보기
+const mopen= document.querySelector(".modalopen")
+const mclose=document.querySelector(".modalclose")
+const modal=document.querySelector(".modal")
+
+function opmodal(){
+    mopen.addEventListener("click",(e)=>{
+        modal.classList.remove("hidden"); 
+        console.log(`${e.target.innerText}입니다`)
+    })
+    mclose.addEventListener("click", function(){
+        modal.classList.add("hidden")
+    })
 }
