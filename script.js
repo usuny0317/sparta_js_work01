@@ -53,8 +53,8 @@ function searchTitle(){
                     <div class="textss">
                     <p class="title">${movie_val[i].title}</p>
                     <small class="avg">${movie_val[i].vote_average}</small>
-                    <p class="sub hidden2" >${movie[i].overview}</p>
-                    <p class="release hidden2">${movie[i].release_date} </p>
+                    <p class="sub hidden2" >${movie_val[i].overview}</p>
+                    <p class="release hidden2">${movie_val[i].release_date} </p>
                     </div>
                 </div>` 
             momcards.appendChild(newcard);}}})
