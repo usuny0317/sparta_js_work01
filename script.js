@@ -65,7 +65,6 @@ function searchTitle(){
 
 //모달 열어보기
 const mopen= document.querySelector(".modalopen")
-const mclose=document.querySelector(".modalclose")
 const modal=document.querySelector(".modal")
 
 mopen.addEventListener("click",(e)=>{
@@ -93,26 +92,10 @@ mopen.addEventListener("click",(e)=>{
             <button class="modalclose">모달 닫기</button>
         </div>`
 
-
+        const mclose=document.querySelector(".modalclose")
+        mclose.addEventListener("click", function(){
+            modal.classList.add("hidden")
+        })
     }else{console.log("요소가 없는데?")}
    
-    
 })
-
-mclose.addEventListener("click", function(){
-    console.log("안눌렸니??")
-    modal.classList.add("hidden")
-})
-
-function opmodal(){
-
-    //console.log(`눌렸냐`)
-   /*  mopen.addEventListener("click",(e)=>{
-        if (e.target.classList.contains("card")) {
-            modal.classList.remove("hidden"); 
-            console.log(`${e.target.innerText}입니다`)
-        }
-        
-    }) */
-    
-}
