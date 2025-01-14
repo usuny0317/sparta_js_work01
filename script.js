@@ -13,11 +13,13 @@ let url="https://api.themoviedb.org/3/movie/popular?api_key=2b065c456f47ab719385
         for(let i=0; i<movie.length; i++){
             let newcard= document.createElement('div');
             newcard.innerHTML=`
-            <div id="card">
+            <div id="card" class="card">
                 <img src="${image_front}original${movie[i].backdrop_path}" class="images">
                 <div class="textss">
-                    <p>${movie[i].title}</p>
-                    <small>${movie[i].vote_average}</small>
+                    <p class="title">${movie[i].title}</p>
+                    <small class="avg">${movie[i].vote_average}</small>
+                    <p class="sub hidden2" >${movie[i].overview}</p>
+                    <p class="release hidden2">${movie[i].release_date} </p>
                 </div>
             </div>` 
             momcards.appendChild(newcard);
@@ -46,11 +48,13 @@ function searchTitle(){
         for(let  i =0 ; i<movie_val.length; i++){
             if(movie_val[i].title.includes(input_value)){
                 let newcard= document.createElement('div');
-                newcard.innerHTML=`<div id="card">
+                newcard.innerHTML=`<div id="card" class="card">
                     <img src="${image_front}original${movie_val[i].backdrop_path}" class="images">
                     <div class="textss">
-                    <p>${movie_val[i].title}</p>
-                    <small>${movie_val[i].vote_average}</small>
+                    <p class="title">${movie_val[i].title}</p>
+                    <small class="avg">${movie_val[i].vote_average}</small>
+                    <p class="sub hidden2" >${movie[i].overview}</p>
+                    <p class="release hidden2">${movie[i].release_date} </p>
                     </div>
                 </div>` 
             momcards.appendChild(newcard);}}})
@@ -64,12 +68,51 @@ const mopen= document.querySelector(".modalopen")
 const mclose=document.querySelector(".modalclose")
 const modal=document.querySelector(".modal")
 
+mopen.addEventListener("click",(e)=>{
+    modal.classList.remove("hidden"); 
+    
+    const card = e.target.closest(".card");
+    console.log("card",card)
+    if(card){
+        const img=card.querySelector(".images");
+        const imgsrc=img.src;
+        const title=card.querySelector(".title").innerText;
+        const avg=card.querySelector(".avg").innerText;
+        const sub=card.querySelector(".sub").innerText;
+        const rel=card.querySelector(".release").innerText;
+
+        modal.innerHTML=`<div class="modal_body">
+            <img src="${imgsrc}" class="images"/>
+            <div class="textss">
+                <p>${title}</p>
+                <p>${sub}</p>
+                <p>${rel}</p>
+                <small>${avg}</small>
+            </div>
+            <button>북마크</button>
+            <button class="modalclose">모달 닫기</button>
+        </div>`
+
+
+    }else{console.log("요소가 없는데?")}
+   
+    
+})
+
+mclose.addEventListener("click", function(){
+    console.log("안눌렸니??")
+    modal.classList.add("hidden")
+})
+
 function opmodal(){
-    mopen.addEventListener("click",(e)=>{
-        modal.classList.remove("hidden"); 
-        console.log(`${e.target.innerText}입니다`)
-    })
-    mclose.addEventListener("click", function(){
-        modal.classList.add("hidden")
-    })
+
+    //console.log(`눌렸냐`)
+   /*  mopen.addEventListener("click",(e)=>{
+        if (e.target.classList.contains("card")) {
+            modal.classList.remove("hidden"); 
+            console.log(`${e.target.innerText}입니다`)
+        }
+        
+    }) */
+    
 }
