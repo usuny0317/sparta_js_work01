@@ -88,9 +88,27 @@ mopen.addEventListener("click",(e)=>{
                 <p>${rel}</p>
                 <small>${avg}</small>
             </div>
-            <button>북마크</button>
-            <button class="modalclose">모달 닫기</button>
+            <button class="booking">북마크 하기</button>
+            <button class="modalclose">x</button>
         </div>`
+        
+
+        const gbookig=document.querySelector(".booking")
+        gbookig.addEventListener("click", function(){
+            // 객체로 지정
+            const dataobj = {
+                src: imgsrc,
+                title: title,
+                sub: sub,
+                rel: rel,
+                avg: avg
+            }
+            //객체 JSON으로 변경.
+            const objtojson=JSON.stringify(dataobj);
+
+            window.localStorage.setItem(`card${title}`,objtojson)
+            console.log(objtojson)
+        })
 
         const mclose=document.querySelector(".modalclose")
         mclose.addEventListener("click", function(){
