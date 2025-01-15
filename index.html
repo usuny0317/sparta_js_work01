@@ -7,33 +7,26 @@
     <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-    <h1>영화 검색</h1>
-    <input id="search" class="input" onkeyup="press_enter()" placeholder="영화를 검색해보세요!" /> 
+    <div class="searchdiv">
+        <h1>영화 검색</h1>
+        <input id="search" class="input" onkeyup="press_enter()" placeholder="영화를 검색해보세요!" /> 
+    </div>
+    
     
     <div class="modal hidden">
-           <!--  <button class="modalclose">모달 닫기</button> -->
+           <!--  모달 틀 -->
     </div>
 
     
     <div id="cards" class="cards modalopen"> <!-- 원래 class="cards" 였음-->
-        <div id="card" >
-            <img src="달봉.jpg" class="images">
-            <div class="textss">
-                <p>귀엽다</p>
-                <small>8.9</small>
-            </div>
-        </div>
-
-        <div id="card">
+        <!-- <div id="card">
             <img src="달봉2.jpg" class="images">
             <div class="textss">
                 <p>귀엽다</p>
                 <small>8.9</small>
             </div>
-        </div>
-
+        </div> -->
     </div>
-
 
     <script src="script.js"></script>
 </body>
