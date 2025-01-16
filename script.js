@@ -30,13 +30,6 @@ let url="https://api.themoviedb.org/3/movie/popular?api_key=2b065c456f47ab719385
     })
 
 
-//엔터(키번호13)누르면 동작하기 
-press_enter=() =>{
-    if(window.event.keyCode ==13){
-        searchTitle();
-    }
-};
-
 //검색
 function searchTitle(){
     momcards.replaceChildren();
@@ -155,7 +148,6 @@ mopen.addEventListener("click",(e)=>{
 
 
 //북마크
-
 const showbook = document.querySelector(".book");
 showbook.addEventListener("click", function(){
 
@@ -181,6 +173,4 @@ showbook.addEventListener("click", function(){
             momcards.appendChild(newcard);
         }  
     }
-
-    
 })

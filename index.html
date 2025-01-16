@@ -9,24 +9,18 @@
 <body>
     <div class="searchdiv">
         <h1>영화 검색</h1>
-        <input id="search" class="input" onkeyup="press_enter()" placeholder="영화를 검색해보세요!" /> 
+        <input id="search" class="input" oninput="searchTitle()" placeholder="영화를 검색해보세요!" /> 
         <button class="book">북마크보기</button>
     </div>
     
     
     <div class="modal hidden">
-           <!--  모달 틀 -->
+        <!-- 모달 틀 -->
     </div>
 
     
     <div id="cards" class="cards modalopen"> <!-- 원래 class="cards" 였음-->
-        <!-- <div id="card">
-            <img src="달봉2.jpg" class="images">
-            <div class="textss">
-                <p>귀엽다</p>
-                <small>8.9</small>
-            </div>
-        </div> -->
+        <!--카드들 들어올 곳!-->
     </div>
 
     <script src="script.js"></script>
