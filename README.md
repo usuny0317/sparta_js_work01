@@ -1,6 +1,6 @@
-![image](https://github.com/user-attachments/assets/9aff9d9b-8a30-489f-9ca3-81afa21dbf80)[ch02 프로그래밍 기초 주차 개인과제]
+![image](https://github.com/user-attachments/assets/9aff9d9b-8a30-489f-9ca3-81afa21dbf80)
 
-![image](https://github.com/user-attachments/assets/45c289f5-5ac3-41f6-aca1-71c09bb25c37)
+[ch02 프로그래밍 기초 주차 개인과제]
 
 주제
 - API와 로컬 저장소를 이용한 영화 검색 및 북마크 웹 개발
