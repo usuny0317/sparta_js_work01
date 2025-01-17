@@ -1,60 +1,40 @@
-//사진 데이터 앞에 붙일거
-const image_front="http://image.tmdb.org/t/p/";
+import { getmovie } from "./ui.js";
+import { fetchMovies, searchMovies } from "./api.js";
+
+
 //카드 추가하기 위해 카드 그룹의 아이디 가져와서 정의해두기
 const momcards =document.getElementById('cards')
 
-
-let url="https://api.themoviedb.org/3/movie/popular?api_key=2b065c456f47ab719385884224806499&language=ko-KR&page=1"
-    fetch(url)
-    .then((res) => {return res.json()})
-    .then((data)=>{
-        let movie=data.results
-        console.log(movie)
-        for(let i=0; i<movie.length; i++){
-            let newcard= document.createElement('div');
-            newcard.innerHTML=`
-            <div id="card" class="card">
-                <img src="${image_front}original${movie[i].backdrop_path}" class="images">
-                <div class="textss">
-                    <p class="title">${movie[i].title}</p>
-                    <small class="avg">${movie[i].vote_average}</small>
-                    <p class="sub hidden2" >${movie[i].overview}</p>
-                    <p class="release hidden2">${movie[i].release_date} </p>
-                </div>
-            </div>` 
-            momcards.appendChild(newcard);
-        }
-    })
-    .catch((err)=>{
-        alert(`${err}: 데이터를 가져오지 못했습니다..`)
-    })
-
-
-//검색
-function searchTitle(){
-    momcards.replaceChildren();
-    let input_value=document.getElementById("search").value;
-    fetch(url)
-    .then((res) => {return res.json()})
-    .then((data)=>{
-        let movie_val =data.results;
-        for(let  i =0 ; i<movie_val.length; i++){
-            if(movie_val[i].title.includes(input_value)){
-                let newcard= document.createElement('div');
-                newcard.innerHTML=`<div id="card" class="card">
-                    <img src="${image_front}original${movie_val[i].backdrop_path}" class="images">
-                    <div class="textss">
-                    <p class="title">${movie_val[i].title}</p>
-                    <small class="avg">${movie_val[i].vote_average}</small>
-                    <p class="sub hidden2" >${movie_val[i].overview}</p>
-                    <p class="release hidden2">${movie_val[i].release_date} </p>
-                    </div>
-                </div>` 
-            momcards.appendChild(newcard);}}})
-    .catch((err)=>{
-        alert(`${err}: 데이터를 가져오지 못했습니다..`)
-    }) 
+//영화 전체 가져오기
+async function movies() {
+    try{
+        const data = await fetchMovies();
+        getmovie(data.results,momcards)
+    }catch(err){
+        console.log(err+":오류남..")
+    }
+    
 }
+
+//페이지 로드 시, 실행
+movies(); 
+
+//검색기능
+document.getElementById("search").addEventListener("input", async (e)=>{
+    //input 내의 입력값 가져오기
+    const inputval=e.target.value;
+
+    //아무것도 없으면 전체 보내주기
+    if(!inputval){
+        const data = await fetchMovies(); 
+        getmovie(data.results, momcards);
+
+        return ;
+    }
+    const data = await searchMovies(inputval); //await 없으면 오류나더라..!
+    getmovie(data.results, momcards);
+
+})
 
 //모달 열어보기
 const mopen= document.querySelector(".modalopen")
@@ -134,6 +114,7 @@ mopen.addEventListener("click",(e)=>{
         const unbook=document.querySelector(".unbooking")
         unbook.addEventListener("click",function(){
             window.localStorage.removeItem(`card${title}`);
+            alert("북마크가 해제되었습니다!")
         })
         }
 
